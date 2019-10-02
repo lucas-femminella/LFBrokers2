@@ -11,8 +11,8 @@ namespace LFbrokersV2
     public class DataUtils
     {
         // TODO: Update connection string
-        //public static String connectionString = "Data Source=LFERREIRO;Initial Catalog=LFbrokers;Integrated Security=True";
-        public static String connectionString = "Server=lfemminella;Database=LFbrokers;Trusted_Connection=True";
+        public static String connectionString = "Data Source=LFERREIRO;Initial Catalog=LFbrokers;Integrated Security=True";
+        //public static String connectionString = "Server=lfemminella;Database=LFbrokers;Trusted_Connection=True";
         //public static String connectionString = "Data Source=DESKTOP-0V1H3B5;Initial Catalog=LFbrokers;Integrated Security=True";
 
         public static void DML(String query)

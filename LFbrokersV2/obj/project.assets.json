@@ -12532,27 +12532,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Lucas Femminella\\.nuget\\packages\\": {},
-    "C:\\ProgramData\\Xamarin\\NuGet\\": {},
+    "C:\\Users\\Leandro Ferreiro\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Lucas Femminella\\source\\repos\\LFbrokersV2\\LFbrokersV2\\LFbrokersV2.csproj",
+      "projectUniqueName": "C:\\Users\\Leandro Ferreiro\\Drive\\Repos\\testsc1\\LFBrokers2\\LFbrokersV2\\LFbrokersV2.csproj",
       "projectName": "LFbrokersV2",
-      "projectPath": "C:\\Users\\Lucas Femminella\\source\\repos\\LFbrokersV2\\LFbrokersV2\\LFbrokersV2.csproj",
-      "packagesPath": "C:\\Users\\Lucas Femminella\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Lucas Femminella\\source\\repos\\LFbrokersV2\\LFbrokersV2\\obj\\",
+      "projectPath": "C:\\Users\\Leandro Ferreiro\\Drive\\Repos\\testsc1\\LFBrokers2\\LFbrokersV2\\LFbrokersV2.csproj",
+      "packagesPath": "C:\\Users\\Leandro Ferreiro\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Leandro Ferreiro\\Drive\\Repos\\testsc1\\LFBrokers2\\LFbrokersV2\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\ProgramData\\Xamarin\\NuGet\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Lucas Femminella\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\Leandro Ferreiro\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.1"

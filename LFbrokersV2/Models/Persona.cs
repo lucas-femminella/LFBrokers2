@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LFbrokersV2.Models
 {
@@ -31,5 +33,25 @@ namespace LFbrokersV2.Models
         public CodigoPostal CodigoPostalNavigation { get; set; }
         public ICollection<Poliza> PolizaAgenteNavigation { get; set; }
         public ICollection<Poliza> PolizaClienteNavigation { get; set; }
+
+        // TODO
+        [NotMapped]
+        public int[] SelectedEspecialidades { get; set; }
+        [NotMapped]
+        public List<SelectListItem> EspecialidadesList { get; set; }
+        [NotMapped]
+        public List<SelectListItem> TipoDocumentoList
+        {
+            get
+            {
+                List<SelectListItem> selectedList = new List<SelectListItem>();
+                selectedList.Add(new SelectListItem { Value = "D.N.I", Text = "D.N.I" });
+                selectedList.Add(new SelectListItem { Value = "L.E", Text = "L.E" });
+                selectedList.Add(new SelectListItem { Value = "L.C.", Text = "L.C." });
+                selectedList.Add(new SelectListItem { Value = "Pasaporte", Text = "Pasaporte" });
+                return selectedList;
+            }
+            set {; }
+        }
     }
 }
