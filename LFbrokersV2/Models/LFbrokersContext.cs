@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using LFbrokersV2.Models;
 
 namespace LFbrokersV2.Models
 {
@@ -38,8 +39,8 @@ namespace LFbrokersV2.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=lfemminella;Database=LFbrokers;Trusted_Connection=True;");
+                String sqlConnection = DataUtils.connectionString;
+                optionsBuilder.UseSqlServer(sqlConnection);
             }
         }
 
@@ -437,5 +438,7 @@ namespace LFbrokersV2.Models
                     .HasMaxLength(50);
             });
         }
+
+        public DbSet<LFbrokersV2.Models.CotizarModel> CotizarModel { get; set; }
     }
 }

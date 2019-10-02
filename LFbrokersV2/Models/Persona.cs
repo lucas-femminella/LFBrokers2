@@ -34,7 +34,6 @@ namespace LFbrokersV2.Models
         public ICollection<Poliza> PolizaAgenteNavigation { get; set; }
         public ICollection<Poliza> PolizaClienteNavigation { get; set; }
 
-        // TODO
         [NotMapped]
         public int[] SelectedEspecialidades { get; set; }
         [NotMapped]
@@ -51,7 +50,8 @@ namespace LFbrokersV2.Models
                 selectedList.Add(new SelectListItem { Value = "Pasaporte", Text = "Pasaporte" });
                 return selectedList;
             }
-            set {; }
+            set {;}
         }
+
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LFbrokersV2.Models;
 
+
 namespace LFbrokersV2.Controllers
 {
     public class AseguradorasController : Controller
@@ -57,6 +58,7 @@ namespace LFbrokersV2.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 _context.Add(aseguradora);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

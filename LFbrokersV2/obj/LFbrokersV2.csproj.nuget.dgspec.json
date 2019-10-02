@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Leandro Ferreiro\\Drive\\Repos\\testsc1\\LFBrokers2\\LFbrokersV2\\LFbrokersV2.csproj": {}
+    "C:\\Users\\Leandro Ferreiro\\Downloads\\LFbrokersV2\\LFbrokersV2\\LFbrokersV2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Leandro Ferreiro\\Drive\\Repos\\testsc1\\LFBrokers2\\LFbrokersV2\\LFbrokersV2.csproj": {
+    "C:\\Users\\Leandro Ferreiro\\Downloads\\LFbrokersV2\\LFbrokersV2\\LFbrokersV2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Leandro Ferreiro\\Drive\\Repos\\testsc1\\LFBrokers2\\LFbrokersV2\\LFbrokersV2.csproj",
+        "projectUniqueName": "C:\\Users\\Leandro Ferreiro\\Downloads\\LFbrokersV2\\LFbrokersV2\\LFbrokersV2.csproj",
         "projectName": "LFbrokersV2",
-        "projectPath": "C:\\Users\\Leandro Ferreiro\\Drive\\Repos\\testsc1\\LFBrokers2\\LFbrokersV2\\LFbrokersV2.csproj",
+        "projectPath": "C:\\Users\\Leandro Ferreiro\\Downloads\\LFbrokersV2\\LFbrokersV2\\LFbrokersV2.csproj",
         "packagesPath": "C:\\Users\\Leandro Ferreiro\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Leandro Ferreiro\\Drive\\Repos\\testsc1\\LFBrokers2\\LFbrokersV2\\obj\\",
+        "outputPath": "C:\\Users\\Leandro Ferreiro\\Downloads\\LFbrokersV2\\LFbrokersV2\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
