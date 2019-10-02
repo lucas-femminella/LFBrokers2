@@ -1,0 +1,299 @@
+﻿@model LFbrokersV2.Models.Persona
+
+@{
+    ViewData["Title"] = "Create";
+}
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<form id="CotizarForm" asp-action="Create">
+    <br /><br />
+    <h2>Cotizacion Seguro de Proxis Medica Individual</h2>
+    <hr />
+
+    <!-- Success Message -->
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-success">
+            <strong>Sus datos han sido registrados con éxito.</strong>  Un agente comercial se estará conectando a la brevedad.
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-md-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nombres" class="control-label">Nombre *</label>
+                <input asp-for="Nombres" class="form-control" required maxlength="50" />
+                <span asp-validation-for="Nombres" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Apellidos" class="control-label">Apellido *</label>
+                <input asp-for="Apellidos" class="form-control" required maxlength="50" />
+                <span asp-validation-for="Apellidos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefono" class="control-label">Telefono **</label>
+                <input asp-for="Telefono" class="form-control" type="number" max="9999999" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Celular" class="control-label">Celular **</label>
+                <input asp-for="Celular" class="form-control" type="number" max="9999999" />
+                <span asp-validation-for="Celular" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="TipoDocumento" class="control-label">Tipo de documento *</label>
+                <select asp-for="TipoDocumento" asp-items="@Model.TipoDocumentoList" class="form-control"></select>
+                <span asp-validation-for="TipoDocumento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NroDocumento" class="control-label">Numero de Documento *</label>
+                <input asp-for="NroDocumento" class="form-control" required />
+                <span asp-validation-for="NroDocumento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label">Email *</label>
+                <input asp-for="Email" class="form-control" type="email" required />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaNacimiento" class="control-label">Fecha de Nacimiento *</label>
+                <input asp-for="FechaNacimiento" class="form-control" type="date" value="DateTime.Today.ToString("yyyy-MM-dd")" />
+                <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <fieldset style="border:1px solid black;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px;	padding-left: 20px;max-width: 66%;">
+        <legend style="border:1px solid black;padding: 3px 6px;font-size: 16px;font-weight: 700;">Direccion</legend>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Calle" class="control-label">Calle *</label>
+                    <input asp-for="Calle" class="form-control" required maxlength="50" />
+                    <span asp-validation-for="Calle" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Piso" class="control-label"></label>
+                    <input asp-for="Piso" class="form-control" type="number" min="1" max="99" />
+                    <span asp-validation-for="Piso" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Altura" class="control-label">Altura *</label>
+                    <input asp-for="Altura" class="form-control" required type="number" min="1" max="99999" />
+                    <span asp-validation-for="Altura" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Departamento" class="control-label"></label>
+                    <input asp-for="Departamento" class="form-control" maxlength="1" />
+                    <span asp-validation-for="Departamento" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Obervaciones" class="control-label"></label>
+            <textarea asp-for="Obervaciones" class="form-control" id="Obervaciones" name="Obervaciones" rows="6" cols="10" maxlength="255"></textarea>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="CodigoPostal" class="control-label">Codigo Postal *</label>
+                    <select asp-for="CodigoPostal" class="form-control" asp-items="ViewBag.CodigoPostal"></select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <br /><br />
+                    <input class="btn btn-default" type="button" value="Buscar" onclick="getLocation('@Model.CodigoPostal');" />
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label name="Localidad" class="control-label">Localidad</label>
+                    <input type="text" class="form-control" name="Localidad" id="Localidad" disabled /><br />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label name="Provincia" class="control-label">Provincia</label>
+                    <input type="text" class="form-control" name="Provincia" id="Provincia" disabled /><br /><br />
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <br /><br />
+    <div>
+        <div class="form-group">
+            <label asp-for="SelectedEspecialidades" class="control-label">Especialidades *</label>
+            <br />
+            <select asp-for="SelectedEspecialidades" asp-items="@Model.EspecialidadesList" class="form-control" style="width:300px;height:200px;">
+            </select>
+        </div>
+    </div>
+    <div>
+        <div class="form-group" style="margin: 0 auto; width: 100px; ">
+            <input type="submit" value="Cotizar" class="btn btn-default" />
+        </div>
+        <div style="display: flex; flex-direction: column;">
+            <p style="margin-left: auto; order: 1;">* Campo Obligatorio</p>
+            <p style="margin-left: auto; order: 2;">** Al menos un campo tiene que estar completo</p>
+        </div>
+    </div>
+</form>
+
+<!-- Buscar Codigo Postal -->
+<script>
+        function getLocation(id) {
+        var e = document.getElementById("CodigoPostal");
+        var selectedValue = e.options[e.selectedIndex].value;
+            $.ajax({
+                url: '@Url.Action("getLocation", "Cotizaciones")',
+                type: 'GET',
+                dataType: 'text',
+                cache: false,
+                data: { 'id': selectedValue },
+                success: function (responseValue) {
+                    var values = responseValue.split(",");
+                    $("#Localidad").val(values[0]);
+                    $("#Provincia").val(values[1]);
+
+                    return responseValue;
+                },
+                error: function () {
+                    alert('Error occured');
+                }
+            });
+    }
+</script>
+
+<!-- Especialidades Limit-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        var especialidadesLimit = 5;
+        var last_valid_selection = null;
+        $('#SelectedEspecialidades').change(function (event) {
+            if ($(this).val().length > especialidadesLimit) {
+                $(this).val(last_valid_selection);
+            } else {
+                last_valid_selection = $(this).val();
+            }
+        });
+    });
+</script>
+
+<!-- Validations -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#CotizarForm').submit(function (e) {
+            e.preventDefault();
+            $(".error").remove();
+
+            // Numero Documento
+            var tipoDocumento = $('#TipoDocumento').val();
+            var nroDocumento = $('#NroDocumento').val();
+            var pasaporteError = '<span class="error">El formato tiene que ser 3 letras más 6 números. (ej. AAF487695). O el formato, debe ser igual al numero de documento mas una letra. (ej. 34251170N),</span>';
+
+            if (tipoDocumento == 'Pasaporte') {
+                // Valid: 34251170N
+                let lastChar = nroDocumento[nroDocumento.length - 1];
+                let pasaporte = nroDocumento.substring(0, nroDocumento.length - 1);
+                let invalidPasaporte = false;
+                if ((typeof lastChar === 'string') && (pasaporte != "" && !isNaN(pasaporte) || parseInt(pasaporte) < 99999999)) {
+                    // Valid
+                }
+                else {
+                    // Valid: AAF487695
+                    for (let i = 0; i < nroDocumento.length; i++) {
+                        if (i == 3) break;
+                        if (!isNaN(nroDocumento.charAt(i))) {
+                            invalidPasaporte = true;
+                        }
+                    }
+                    let pasaporteNumbers = nroDocumento.substring(3, nroDocumento.length);
+                    if (pasaporteNumbers == "" || isNaN(pasaporteNumbers) || parseInt(pasaporteNumbers) < 99999) {
+                        invalidPasaporte = true;
+                    }
+                }
+                if (invalidPasaporte) {
+                    $('#NroDocumento').after(pasaporteError);
+                }
+            }
+            else {
+                if (isNaN(nroDocumento) || parseInt(nroDocumento) > 99999999) {
+                    $('#NroDocumento').after('<span class="error">Solo se aceptan hasta 8 caracteres numéricos.</span>');
+                }
+            }
+
+            // Direccion
+            var piso = $('#Piso').val();
+            var departamento = $('#Departamento').val();
+            if (departamento != "") {
+                if (piso == "" || isNaN(piso) || parseInt(piso) > 99) {
+                    $('#Piso').after('<span class="error">Solo acepta hasta 2 caracteres numéricos.</span>');
+                }
+            }
+            if (piso != "") {
+                if (departamento == "" || !isNaN(departamento) || departamento.length > 1) {
+                    $('#Departamento').after('<span class="error">Solo se acepta 1 letra.</span>');
+                }
+            }
+
+            // Telefono
+            var telefono = $('#Telefono').val();
+            var celular = $('#Celular').val();
+            if (telefono == "" && celular == "") {
+                $('#Telefono').after('<span class="error">Telefono o Celular deben estar completos.</span>');
+                $('#Celular').after('<span class="error">Telefono o Celular deben estar completos.</span>');
+            }
+
+            // Fecha Nacimiento
+            var fechaNacimiento = $('#FechaNacimiento').val();
+            function underAgeValidate(birthday) {
+                var optimizedBirthday = birthday.replace(/-/g, "/");
+                var myBirthday = new Date(optimizedBirthday);
+                var currentDate = new Date().toJSON().slice(0, 10) + ' 01:00:00';
+                var myAge = ~~((Date.now(currentDate) - myBirthday) / (31557600000));
+                return (myAge < 18) ? false : true;
+            }
+            if (!underAgeValidate(fechaNacimiento)) {
+                $('#FechaNacimiento').after('<span class="error">Tiene que ser mayor de 18 años.</span>');
+            }
+
+            // Submit form if there are no errors    
+            if ($(".error").length == 0 && $("#CotizarForm").valid()) {
+                $(this).unbind('submit').submit();
+            }
+        });
+
+    });
+</script>
+
+<style>
+    .error {
+        color: #a94442;
+        margin-left: 5px;
+    }
+
+    label.error {
+        display: inline;
+    }
+</style>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

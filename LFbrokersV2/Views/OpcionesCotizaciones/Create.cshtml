@@ -1,0 +1,87 @@
+﻿@model LFbrokersV2.Models.OpcionesCotizacion
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>OpcionesCotizacion</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Poliza" class="control-label"></label>
+                <select asp-for="Poliza" class ="form-control" asp-items="ViewBag.Poliza"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="PrimaBase" class="control-label"></label>
+                <input asp-for="PrimaBase" class="form-control" />
+                <span asp-validation-for="PrimaBase" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SumaAsegurada" class="control-label"></label>
+                <input asp-for="SumaAsegurada" class="form-control" />
+                <span asp-validation-for="SumaAsegurada" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RecargoPrima" class="control-label"></label>
+                <input asp-for="RecargoPrima" class="form-control" />
+                <span asp-validation-for="RecargoPrima" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ComisionPrima" class="control-label"></label>
+                <input asp-for="ComisionPrima" class="form-control" />
+                <span asp-validation-for="ComisionPrima" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PrimaPoliza" class="control-label"></label>
+                <input asp-for="PrimaPoliza" class="form-control" />
+                <span asp-validation-for="PrimaPoliza" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PremioTotal" class="control-label"></label>
+                <input asp-for="PremioTotal" class="form-control" />
+                <span asp-validation-for="PremioTotal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PremioCuota" class="control-label"></label>
+                <input asp-for="PremioCuota" class="form-control" />
+                <span asp-validation-for="PremioCuota" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Condicion" class="control-label"></label>
+                <input asp-for="Condicion" class="form-control" />
+                <span asp-validation-for="Condicion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Aseguradora" class="control-label"></label>
+                <input asp-for="Aseguradora" class="form-control" />
+                <span asp-validation-for="Aseguradora" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OpcionElegida" class="control-label"></label>
+                <input asp-for="OpcionElegida" class="form-control" />
+                <span asp-validation-for="OpcionElegida" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

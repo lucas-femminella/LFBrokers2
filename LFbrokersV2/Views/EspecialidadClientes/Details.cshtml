@@ -1,0 +1,36 @@
+﻿@model LFbrokersV2.Models.EspecialidadCliente
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>EspecialidadCliente</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Cliente)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Cliente)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Vigente)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Vigente)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EspecialidadNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EspecialidadNavigation.Nombre)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

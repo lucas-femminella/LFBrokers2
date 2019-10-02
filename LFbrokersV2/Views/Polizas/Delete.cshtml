@@ -1,0 +1,135 @@
+﻿@model LFbrokersV2.Models.Poliza
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Poliza</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Estado)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CantidadCuotas)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CantidadCuotas)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductoAseguradora)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProductoAseguradora)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RecargosFinancieros)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RecargosFinancieros)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Impuestos)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Impuestos)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SumaAsegurada)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SumaAsegurada)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PrimaBase)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PrimaBase)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RecargoPrima)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RecargoPrima)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ComisionPrima)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ComisionPrima)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PrimaPoliza)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PrimaPoliza)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PremioTotal)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PremioTotal)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PremioCuota)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PremioCuota)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VigenciaDesde)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VigenciaDesde)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VigenciaHasta)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VigenciaHasta)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Matricula)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Matricula)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroPoliza)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NumeroPoliza)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MotivoRecotizacion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MotivoRecotizacion)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AgenteNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AgenteNavigation.Apellidos)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ClienteNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ClienteNavigation.Apellidos)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

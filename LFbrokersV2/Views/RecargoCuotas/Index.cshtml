@@ -1,0 +1,47 @@
+﻿@model IEnumerable<LFbrokersV2.Models.RecargoCuotas>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Recargo de Cuotas</h2>
+
+<p>
+    <a asp-action="Create">Nuevo Recargo Cuota</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CantidadCuotas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecargoFinanciero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AseguradoraNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CantidadCuotas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecargoFinanciero)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AseguradoraNavigation.Nombre)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
