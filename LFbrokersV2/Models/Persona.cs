@@ -35,7 +35,9 @@ namespace LFbrokersV2.Models
         public ICollection<Poliza> PolizaClienteNavigation { get; set; }
 
         [NotMapped]
-        public int[] SelectedEspecialidades { get; set; }
+        public int SelectedEspecialidades { get; set; }
+        [NotMapped]
+        public int[] Especialidades { get; set; }
         [NotMapped]
         public List<SelectListItem> EspecialidadesList { get; set; }
         [NotMapped]

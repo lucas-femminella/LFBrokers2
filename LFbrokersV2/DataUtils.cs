@@ -11,8 +11,8 @@ namespace LFbrokersV2
     public class DataUtils
     {
         // TODO: Update connection string
-        public static String connectionString = "Data Source=LFERREIRO;Initial Catalog=LFbrokers;Integrated Security=True";
-        //public static String connectionString = "Server=lfemminella;Database=LFbrokers;Trusted_Connection=True";
+        //public static String connectionString = "Data Source=LFERREIRO;Initial Catalog=LFbrokers;Integrated Security=True";
+        public static String connectionString = "Server=lfemminella;Database=LFbrokers;Trusted_Connection=True";
         //public static String connectionString = "Data Source=DESKTOP-0V1H3B5;Initial Catalog=LFbrokers;Integrated Security=True";
 
         public static void DML(String query)
@@ -63,7 +63,7 @@ namespace LFbrokersV2
             conection.Open();
             SqlCommand cmd;
             SqlDataReader dr;
-            String qr = "SELECT " + String.Join(",", fields) + " FROM " + model + " WHERE " + condition;
+            String qr = "SELECT " + String.Join(",", fields) + " FROM " + model + " WHERE " + condition + " LIMIT 1";
             cmd = new SqlCommand("SELECT " + String.Join(",", fields) + " FROM " + model + " WHERE " + condition, conection);
             try
             {

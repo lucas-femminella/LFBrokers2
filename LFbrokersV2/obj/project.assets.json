@@ -12532,23 +12532,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Leandro Ferreiro\\.nuget\\packages\\": {},
+    "C:\\Users\\Admin\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Leandro Ferreiro\\Downloads\\LFbrokersV2\\LFbrokersV2\\LFbrokersV2.csproj",
+      "projectUniqueName": "C:\\Users\\Admin\\Desktop\\LFbrokersV2\\LFbrokersV2\\LFbrokersV2.csproj",
       "projectName": "LFbrokersV2",
-      "projectPath": "C:\\Users\\Leandro Ferreiro\\Downloads\\LFbrokersV2\\LFbrokersV2\\LFbrokersV2.csproj",
-      "packagesPath": "C:\\Users\\Leandro Ferreiro\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Leandro Ferreiro\\Downloads\\LFbrokersV2\\LFbrokersV2\\obj\\",
+      "projectPath": "C:\\Users\\Admin\\Desktop\\LFbrokersV2\\LFbrokersV2\\LFbrokersV2.csproj",
+      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Admin\\Desktop\\LFbrokersV2\\LFbrokersV2\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Leandro Ferreiro\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

@@ -87,43 +87,55 @@ namespace LFbrokersV2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,TipoDocumento,NroDocumento,Nombres,Apellidos,Calle,Altura,Piso,Departamento,Obervaciones,FechaNacimiento,CodigoPostal,Telefono,Celular,Email,Tipo")] Persona persona)
         {
-            ViewBag.Message = null;
-
-            if (ModelState.IsValid)
-                {
-                    int personaId = DataUtils.getId("Persona");
-
-                    persona.Id = personaId;
+            ViewBag.SuccessMessage = null;
+            ViewBag.ErrorMessage = null;
+            
+            if (ModelState.IsValid){
+                try {
                     persona.Tipo = "Cliente Potencial";
-
-
-                    _context.Add(persona);
+                    
+                    // Upsert Persona
+                    Dictionary<String, String> personaMap = DataUtils.querySingleRecord("Persona", new string[] { "Id" }, " NroDocumento = '" + persona.NroDocumento + "'");
+                    if (personaMap.Count > 0){
+                        persona.Id = int.Parse(personaMap["Id"]);
+                        _context.Update(persona);
+                    }
+                    else {
+                        int personaId = DataUtils.getId("Persona");
+                        persona.Id = personaId;
+                        _context.Add(persona);
+                    }
                     await _context.SaveChangesAsync();
 
                     // Insert Poliza
                     int polizaId = DataUtils.getId("Poliza");
                     String polizaEstado = "A Cotizar";
-                
-                    // TODO: Get Agente
-                    DataUtils.DML("Insert into Poliza (Id, Cliente, Estado, CantidadCuotas, ProductoAseguradora, RecargosFinancieros, Impuestos, SumaAsegurada, PrimaBase, Agente) values (" + polizaId + "," + personaId + ",'" + polizaEstado + "'," + 0 + "," + 0 + "," + 0 + "," + 0 + "," + 0 + "," + 0 +",'"+ personaId + "')");
+
+                    DataUtils.DML("Insert into Poliza (Id, Cliente, Estado, CantidadCuotas, ProductoAseguradora, RecargosFinancieros, Impuestos, SumaAsegurada, PrimaBase, Agente) values (" + polizaId + "," + persona.Id + ",'" + polizaEstado + "'," + 0 + "," + 0 + "," + 0 + "," + 0 + "," + 0 + "," + 0 +",'"+ persona.Id + "')");
 
                     // Insert Especialidades
-                    String[] especialidadesIds = Request.Form["SelectedEspecialidades"];
-                        int especialidadClienteId = DataUtils.getId("EspecialidadCliente");
+                    String especialidadesIds = Request.Form["Especialidades"];
                         if (especialidadesIds.Length > 0)
                         {
-                            foreach (String especialidadId in especialidadesIds)
+                            foreach (String especialidadId in especialidadesIds.Split(","))
                             {
+                                int especialidadClienteId = DataUtils.getId("EspecialidadCliente");
+
                                 // TODO Work with Arrays
                                 DataUtils.DML("Insert into EspecialidadCliente (Id, Especialidad, Cliente, Vigente) values (" + especialidadClienteId + ",'" + especialidadId + "'," + persona.Id + ",'" + true + "')");
                             }
                         }
 
                     //return RedirectToAction(nameof(Index));
+                    ViewBag.SuccessMessage = "Success";
                 }
-                ViewData["CodigoPostal"] = new SelectList(_context.CodigoPostal, "Id", "CodigoPostal1", persona.CodigoPostal);
-
-            ViewBag.Message = "Success";
+                catch (Exception ex){
+                    ViewBag.SuccessMessage = null;
+                    ViewBag.ErrorMessage = ex.Message;
+                }     
+            }
+            
+            ViewData["CodigoPostal"] = new SelectList(_context.CodigoPostal, "Id", "CodigoPostal1", persona.CodigoPostal);
             return View(persona);
         }
 
