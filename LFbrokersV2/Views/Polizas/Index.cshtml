@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<LFbrokersV2.Models.Poliza>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Polizas a cotizar";
 }
 
-<h2>Index</h2>
+<h2>Polizas a cotizar</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,131 +13,44 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Estado)
+                Nombre
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CantidadCuotas)
+                Apellido
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProductoAseguradora)
+                Provincia
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RecargosFinancieros)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Impuestos)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SumaAsegurada)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PrimaBase)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RecargoPrima)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ComisionPrima)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PrimaPoliza)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PremioTotal)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PremioCuota)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VigenciaDesde)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VigenciaHasta)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Matricula)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumeroPoliza)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MotivoRecotizacion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AgenteNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ClienteNavigation)
+                Localidad
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
+        @if (item.Estado == "A Cotizar"){ 
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Estado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CantidadCuotas)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductoAseguradora)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RecargosFinancieros)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Impuestos)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SumaAsegurada)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrimaBase)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RecargoPrima)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ComisionPrima)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrimaPoliza)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PremioTotal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PremioCuota)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VigenciaDesde)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VigenciaHasta)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Matricula)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumeroPoliza)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MotivoRecotizacion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AgenteNavigation.Apellidos)
+                @Html.DisplayFor(modelItem => item.ClienteNavigation.Nombres)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ClienteNavigation.Apellidos)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                @Html.DisplayFor(modelItem => item.ClienteNavigation.CodigoPostalNavigation.LocalidadNavigation.ProvinciaNavigation.Provincia1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClienteNavigation.CodigoPostalNavigation.LocalidadNavigation.Localidad1)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Cotizar</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
+        }
+        
 }
     </tbody>
 </table>

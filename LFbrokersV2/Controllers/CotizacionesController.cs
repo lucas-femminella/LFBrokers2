@@ -24,7 +24,7 @@ namespace LFbrokersV2.Controllers
         // GET: Cotizaciones
         public async Task<IActionResult> Index()
         {
-            var lFbrokersContext = _context.Persona.Include(p => p.CodigoPostalNavigation);
+            var lFbrokersContext = _context.Persona.Include(p => p.CodigoPostalNavigation).Include(p => p.CodigoPostalNavigation.LocalidadNavigation).Include(p => p.CodigoPostalNavigation.LocalidadNavigation.ProvinciaNavigation);
 
             return View(await lFbrokersContext.ToListAsync());
         }
@@ -54,30 +54,12 @@ namespace LFbrokersV2.Controllers
         {
             var vm = new Persona();
             vm.EspecialidadesList = DataUtils.getSelectListItems("Especialidad", "ID", "Nombre");
-
             ViewData["CodigoPostal"] = new SelectList(_context.CodigoPostal, "Id", "CodigoPostal1");
-            ViewData["Localidad"] = "Localidad";
-            ViewData["Provincia"] = "Provincia";
+            ViewData["Localidad"] = new SelectList(_context.Localidad, "Id", "Localidad1");
+            ViewData["Provincia"] = new SelectList(_context.Provincia, "Id", "Provincia1");
 
             return View(vm);
         }
-
-
-        [HttpGet]
-        public String getLocation(string id)
-        {
-            Dictionary<String, String> localidadMap = DataUtils.querySingleRecord("CodigoPostal", new string[] { "Localidad" }, " ID = '" + id + "'");
-
-            String localidadId = localidadMap["Localidad"];
-
-            Dictionary<String, String> provinciaMap = DataUtils.querySingleRecord("Localidad", new string[] { "Localidad", "Provincia" }, " ID = '" + localidadId + "'");
-            String response = provinciaMap["Localidad"] + ",";
-            String pronvinciaId = provinciaMap["Provincia"];
-            provinciaMap = DataUtils.querySingleRecord("Provincia", new string[] { "Provincia" }, " ID = '" + pronvinciaId + "'");
-            response += provinciaMap["Provincia"] ;
-
-            return response;
-        } 
 
 
         // POST: Cotizaciones/Create
@@ -111,7 +93,7 @@ namespace LFbrokersV2.Controllers
                     int polizaId = DataUtils.getId("Poliza");
                     String polizaEstado = "A Cotizar";
 
-                    DataUtils.DML("Insert into Poliza (Id, Cliente, Estado, CantidadCuotas, ProductoAseguradora, RecargosFinancieros, Impuestos, SumaAsegurada, PrimaBase, Agente) values (" + polizaId + "," + persona.Id + ",'" + polizaEstado + "'," + 0 + "," + 0 + "," + 0 + "," + 0 + "," + 0 + "," + 0 +",'"+ persona.Id + "')");
+                    DataUtils.DML("Insert into Poliza (Id, Cliente, Estado, CantidadCuotas, ProductoAseguradora, RecargosFinancieros, Impuestos, SumaAsegurada, PrimaBase) values (" + polizaId + "," + persona.Id + ",'" + polizaEstado + "'," + 0 + "," + 0 + "," + 0 + "," + 0 + "," + 0 + "," + 0 + ")");
 
                     // Insert Especialidades
                     String especialidadesIds = Request.Form["Especialidades"];

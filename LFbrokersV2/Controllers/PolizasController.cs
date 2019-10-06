@@ -21,7 +21,7 @@ namespace LFbrokersV2.Controllers
         // GET: Polizas
         public async Task<IActionResult> Index()
         {
-            var lFbrokersContext = _context.Poliza.Include(p => p.AgenteNavigation).Include(p => p.ClienteNavigation);
+            var lFbrokersContext = _context.Poliza.Include(p => p.AgenteNavigation).Include(p => p.ClienteNavigation).Include(p => p.ClienteNavigation.CodigoPostalNavigation.LocalidadNavigation.ProvinciaNavigation);
             return View(await lFbrokersContext.ToListAsync());
         }
 
@@ -66,6 +66,7 @@ namespace LFbrokersV2.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["Agente"] = new SelectList(_context.Persona, "Id", "Apellidos", poliza.Agente);
             ViewData["Cliente"] = new SelectList(_context.Persona, "Id", "Apellidos", poliza.Cliente);
             return View(poliza);
