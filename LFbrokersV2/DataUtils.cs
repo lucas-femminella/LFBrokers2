@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections;
+using LFbrokersV2.Models;
 
 namespace LFbrokersV2
 {
@@ -63,8 +64,8 @@ namespace LFbrokersV2
             conection.Open();
             SqlCommand cmd;
             SqlDataReader dr;
-            String qr = "SELECT " + String.Join(",", fields) + " FROM " + model + " WHERE " + condition + " LIMIT 1";
-            cmd = new SqlCommand("SELECT " + String.Join(",", fields) + " FROM " + model + " WHERE " + condition, conection);
+            String qr = "SELECT TOP 1 " + String.Join(",", fields) + " FROM " + model + " WHERE " + condition;
+            cmd = new SqlCommand(qr, conection);
             try
             {
                 dr = cmd.ExecuteReader();
@@ -109,6 +110,53 @@ namespace LFbrokersV2
             conection.Close();
 
             return Convert.ToInt32(maxId);
+        }
+
+        public static List<Especialidad> getEspecialidades(int clienteId)
+        {
+            List<Especialidad> especialidades = new List<Especialidad>();
+            SqlConnection conection = new SqlConnection(connectionString);
+            conection.Open();
+            SqlCommand cmd;
+            SqlDataReader dr;
+            String query = "Select Id, Cliente, Especialidad from EspecialidadCliente WHERE Cliente = " + clienteId + " AND Vigente = 1";
+            List<int> especialidadesIds = new List<int>();
+
+            cmd = new SqlCommand(query, conection);
+            try
+            {
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                   especialidadesIds.Add(Convert.ToInt32(dr.GetValue(dr.GetOrdinal("Especialidad")).ToString()));
+                }
+                if (especialidadesIds.Count > 0)
+                {
+                    conection.Close();
+                    conection.Open();
+
+                    var inList = "(" + string.Join(", ", especialidadesIds.Select(t => t)) + ")";
+                    query = "Select Id, Nombre from Especialidad WHERE Id IN " + inList;
+                    cmd = new SqlCommand(query, conection);
+                    dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    { 
+                        Especialidad especialidadToAdd = new Especialidad();
+                        especialidadToAdd.Nombre =  dr["Nombre"].ToString();
+                        especialidadToAdd.Id =  Convert.ToInt32(dr["Id"].ToString());
+                        especialidades.Add(especialidadToAdd);
+
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+            }
+            finally
+            {
+                conection.Close();
+            }
+            return especialidades;
         }
     }
 }

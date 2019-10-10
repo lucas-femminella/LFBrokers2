@@ -21,7 +21,7 @@ namespace LFbrokersV2.Controllers
         // GET: Polizas
         public async Task<IActionResult> Index()
         {
-            var lFbrokersContext = _context.Poliza.Include(p => p.AgenteNavigation).Include(p => p.ClienteNavigation).Include(p => p.ClienteNavigation.CodigoPostalNavigation.LocalidadNavigation.ProvinciaNavigation);
+            var lFbrokersContext = _context.Poliza.Include(p => p.ClienteNavigation).Include(p => p.ClienteNavigation.CodigoPostalNavigation.LocalidadNavigation.ProvinciaNavigation);
             return View(await lFbrokersContext.ToListAsync());
         }
 
@@ -34,7 +34,7 @@ namespace LFbrokersV2.Controllers
             }
 
             var poliza = await _context.Poliza
-                .Include(p => p.AgenteNavigation)
+               // .Include(p => p.AgenteNavigation)
                 .Include(p => p.ClienteNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (poliza == null)
@@ -48,7 +48,7 @@ namespace LFbrokersV2.Controllers
         // GET: Polizas/Create
         public IActionResult Create()
         {
-            ViewData["Agente"] = new SelectList(_context.Persona, "Id", "Apellidos");
+           // ViewData["Agente"] = new SelectList(_context.Persona, "Id", "Apellidos");
             ViewData["Cliente"] = new SelectList(_context.Persona, "Id", "Apellidos");
             return View();
         }
@@ -67,7 +67,7 @@ namespace LFbrokersV2.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["Agente"] = new SelectList(_context.Persona, "Id", "Apellidos", poliza.Agente);
+          //  ViewData["Agente"] = new SelectList(_context.Persona, "Id", "Apellidos", poliza.Agente);
             ViewData["Cliente"] = new SelectList(_context.Persona, "Id", "Apellidos", poliza.Cliente);
             return View(poliza);
         }
@@ -75,18 +75,26 @@ namespace LFbrokersV2.Controllers
         // GET: Polizas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();            
 
-            var poliza = await _context.Poliza.FindAsync(id);
-            if (poliza == null)
-            {
-                return NotFound();
-            }
-            ViewData["Agente"] = new SelectList(_context.Persona, "Id", "Apellidos", poliza.Agente);
-            ViewData["Cliente"] = new SelectList(_context.Persona, "Id", "Apellidos", poliza.Cliente);
+           // var poliza = await _context.Poliza.FindAsync(id);
+                       
+
+           var poliza = await _context.Poliza
+               // .Include(p => p.AgenteNavigation)
+                .Include(p => p.ClienteNavigation).Include(p => p.ClienteNavigation.CodigoPostalNavigation.ZonaNavigation)
+                .Include(p => p.ClienteNavigation.CodigoPostalNavigation.LocalidadNavigation.ProvinciaNavigation)
+                .FirstOrDefaultAsync(m => m.Id == id);
+       
+            if (poliza == null) return NotFound();
+            
+           /* Dictionary<String, String> clienteMap = DataUtils.querySingleRecord("Persona", new string[] { "Nombres", "Apellidos" }, " Id = '" + poliza.Cliente + "'");
+            ViewData["ClienteNombre"] = clienteMap["Nombres"];
+            ViewData["ClienteApellido"] = clienteMap["Apellidos"];
+            */
+            List<Especialidad> listEspecialidades = DataUtils.getEspecialidades(poliza.Cliente);
+            ViewData["Especialidades"] = listEspecialidades;
+
             return View(poliza);
         }
 
@@ -122,8 +130,9 @@ namespace LFbrokersV2.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Agente"] = new SelectList(_context.Persona, "Id", "Apellidos", poliza.Agente);
-            ViewData["Cliente"] = new SelectList(_context.Persona, "Id", "Apellidos", poliza.Cliente);
+            //ViewData["Agente"] = new SelectList(_context.Persona, "Id", "Apellidos", poliza.Agente);
+            //ViewData["Cliente"] = new SelectList(_context.Persona, "Id", "Apellidos", poliza.Cliente);
+           
             return View(poliza);
         }
 
@@ -136,7 +145,7 @@ namespace LFbrokersV2.Controllers
             }
 
             var poliza = await _context.Poliza
-                .Include(p => p.AgenteNavigation)
+              //  .Include(p => p.AgenteNavigation)
                 .Include(p => p.ClienteNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (poliza == null)

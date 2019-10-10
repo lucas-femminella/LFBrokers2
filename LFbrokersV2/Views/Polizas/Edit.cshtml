@@ -4,7 +4,54 @@
     ViewData["Title"] = "Edit";
 }
 
-<h2>Cotizar Praxis Médica </h2 >
+<h2>Cotizar Praxis Médica @Html.DisplayFor(Model => Model.ClienteNavigation.Nombres)
+@Html.DisplayFor(Model => Model.ClienteNavigation.Apellidos) </h2 > 
+
+<style>
+    .headerInfo{
+      display: flex;
+    }
+    .headerInfo div {
+      flex: 1; /*grow*/
+    }
+</style>
+<div class="headerInfo">
+    <div>
+    <text>Especialidades: </text>
+        <ul id="Especialidades">
+            @foreach (var esp in ViewBag.Especialidades)
+            {
+                <li>@esp.Nombre</li>
+            }
+        </ul>
+    </div>
+
+    <div>
+        <text>Cantidad Cuotas:</text>
+        <select id="Cuotas">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+        </select> 
+    </div>
+
+    <div>
+        <text>Impuestos</text>
+        <div id="Impuestos">
+          @Html.DisplayFor(Model => Model.ClienteNavigation.CodigoPostalNavigation.ZonaNavigation.Impuesto)
+        </div>
+    </div>
+</div>
+
 
 <div id="example-table"></div>
 
@@ -80,110 +127,12 @@
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Cliente" class="control-label"></label>
-                <select asp-for="Cliente" class="form-control" asp-items="ViewBag.Cliente"></select>
-                <span asp-validation-for="Cliente" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Estado" class="control-label"></label>
-                <input asp-for="Estado" class="form-control" />
-                <span asp-validation-for="Estado" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CantidadCuotas" class="control-label"></label>
-                <input asp-for="CantidadCuotas" class="form-control" />
-                <span asp-validation-for="CantidadCuotas" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ProductoAseguradora" class="control-label"></label>
-                <input asp-for="ProductoAseguradora" class="form-control" />
-                <span asp-validation-for="ProductoAseguradora" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RecargosFinancieros" class="control-label"></label>
-                <input asp-for="RecargosFinancieros" class="form-control" />
-                <span asp-validation-for="RecargosFinancieros" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Impuestos" class="control-label"></label>
-                <input asp-for="Impuestos" class="form-control" />
-                <span asp-validation-for="Impuestos" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SumaAsegurada" class="control-label"></label>
-                <input asp-for="SumaAsegurada" class="form-control" />
-                <span asp-validation-for="SumaAsegurada" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PrimaBase" class="control-label"></label>
-                <input asp-for="PrimaBase" class="form-control" />
-                <span asp-validation-for="PrimaBase" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RecargoPrima" class="control-label"></label>
-                <input asp-for="RecargoPrima" class="form-control" />
-                <span asp-validation-for="RecargoPrima" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ComisionPrima" class="control-label"></label>
-                <input asp-for="ComisionPrima" class="form-control" />
-                <span asp-validation-for="ComisionPrima" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PrimaPoliza" class="control-label"></label>
-                <input asp-for="PrimaPoliza" class="form-control" />
-                <span asp-validation-for="PrimaPoliza" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PremioTotal" class="control-label"></label>
-                <input asp-for="PremioTotal" class="form-control" />
-                <span asp-validation-for="PremioTotal" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PremioCuota" class="control-label"></label>
-                <input asp-for="PremioCuota" class="form-control" />
-                <span asp-validation-for="PremioCuota" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="VigenciaDesde" class="control-label"></label>
-                <input asp-for="VigenciaDesde" class="form-control" />
-                <span asp-validation-for="VigenciaDesde" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="VigenciaHasta" class="control-label"></label>
-                <input asp-for="VigenciaHasta" class="form-control" />
-                <span asp-validation-for="VigenciaHasta" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Matricula" class="control-label"></label>
-                <input asp-for="Matricula" class="form-control" />
-                <span asp-validation-for="Matricula" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NumeroPoliza" class="control-label"></label>
-                <input asp-for="NumeroPoliza" class="form-control" />
-                <span asp-validation-for="NumeroPoliza" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Agente" class="control-label"></label>
-                <select asp-for="Agente" class="form-control" asp-items="ViewBag.Agente"></select>
-                <span asp-validation-for="Agente" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MotivoRecotizacion" class="control-label"></label>
-                <input asp-for="MotivoRecotizacion" class="form-control" />
-                <span asp-validation-for="MotivoRecotizacion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Volver a Listado de Polizas a Cotizas</a>
 </div>
 
 @section Scripts {

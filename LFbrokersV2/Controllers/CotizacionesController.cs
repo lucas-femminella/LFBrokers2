@@ -92,8 +92,8 @@ namespace LFbrokersV2.Controllers
                     // Insert Poliza
                     int polizaId = DataUtils.getId("Poliza");
                     String polizaEstado = "A Cotizar";
-
-                    DataUtils.DML("Insert into Poliza (Id, Cliente, Estado, CantidadCuotas, ProductoAseguradora, RecargosFinancieros, Impuestos, SumaAsegurada, PrimaBase) values (" + polizaId + "," + persona.Id + ",'" + polizaEstado + "'," + 0 + "," + 0 + "," + 0 + "," + 0 + "," + 0 + "," + 0 + ")");
+                    // TODO: Set Agente
+                    DataUtils.DML("Insert into Poliza (Id, Cliente, Estado, CantidadCuotas, ProductoAseguradora, RecargosFinancieros, Impuestos, SumaAsegurada, PrimaBase, Agente) values (" + polizaId + "," + persona.Id + ",'" + polizaEstado + "'," + 0 + "," + 0 + "," + 0 + "," + 0 + "," + 0 + "," + 0 + "," + persona.Id +")");
 
                     // Insert Especialidades
                     String especialidadesIds = Request.Form["Especialidades"];
