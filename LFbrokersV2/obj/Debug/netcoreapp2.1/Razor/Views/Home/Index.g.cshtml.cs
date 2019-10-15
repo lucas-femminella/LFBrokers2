@@ -79,7 +79,7 @@ using LFbrokersV2.Models;
             ");
             EndContext();
             BeginContext(490, 71, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "e452248e9a9e4e67b21a6cb96274ec87", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "5f8e602a0b394e3396553614bfb03371", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -110,7 +110,7 @@ using LFbrokersV2.Models;
             ");
             EndContext();
             BeginContext(993, 77, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "60d1ef4040634342ab7bf330d180478a", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "d5d8dcb61c70452f9f32f40b68059d4d", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -141,7 +141,7 @@ using LFbrokersV2.Models;
             ");
             EndContext();
             BeginContext(1526, 79, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "7e397f9ae35a43ea8f139e688cfeabbd", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "e9174795f36546db9f8a4650a447f75b", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -187,7 +187,7 @@ using LFbrokersV2.Models;
             <li>");
             EndContext();
             BeginContext(2628, 54, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "89eb86257c97480ea048b1302d62ee2d", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "935a1100ec7844419ca5bec7320f74cf", async() => {
                 BeginContext(2660, 18, true);
                 WriteLiteral("Cotizacion Cliente");
                 EndContext();
@@ -208,7 +208,7 @@ using LFbrokersV2.Models;
             WriteLiteral("</li>\r\n            <li>");
             EndContext();
             BeginContext(2705, 49, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "36bb0fe6e36f4c58ad4ec2a88336cc3a", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c3bd9a61fb9349a19a934d54c2d757fb", async() => {
                 BeginContext(2725, 25, true);
                 WriteLiteral("Polizas a Cotizar listado");
                 EndContext();
@@ -229,7 +229,7 @@ using LFbrokersV2.Models;
             WriteLiteral("</li>\r\n        </ul>\r\n    </div>\r\n    <div class=\"col-md-3\">\r\n        <h2>In progress:</h2>\r\n        <ul>\r\n            <li>");
             EndContext();
             BeginContext(2877, 45, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c50ebc4927314cd5beae3a5ff589b15a", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ebea300d21f74038bb7f9edc3f891079", async() => {
                 BeginContext(2904, 14, true);
                 WriteLiteral("Cotizar Poliza");
                 EndContext();

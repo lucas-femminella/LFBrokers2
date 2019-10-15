@@ -1,5 +1,4 @@
 ﻿@model LFbrokersV2.Models.Poliza
-
 @{
     ViewData["Title"] = "Edit";
 }
@@ -14,127 +13,237 @@
     .headerInfo div {
       flex: 1; /*grow*/
     }
+    .tabulator-col-title{
+        font-size: 12px;
+    }
 </style>
-<div class="headerInfo">
-    <div>
-    <text>Especialidades: </text>
-        <ul id="Especialidades">
-            @foreach (var esp in ViewBag.Especialidades)
-            {
-                <li>@esp.Nombre</li>
-            }
-        </ul>
-    </div>
+<head>
+    <link href="~/tabulator/dist/css/semantic-ui/tabulator_semantic-ui.min.css" rel="stylesheet">
+    <script type="text/javascript" src="~/tabulator/dist/js/tabulator.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+</head>
 
-    <div>
-        <text>Cantidad Cuotas:</text>
-        <select id="Cuotas">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-          <option value="11">11</option>
-          <option value="12">12</option>
-        </select> 
-    </div>
 
-    <div>
-        <text>Impuestos</text>
-        <div id="Impuestos">
-          @Html.DisplayFor(Model => Model.ClienteNavigation.CodigoPostalNavigation.ZonaNavigation.Impuesto)
+@{ 
+    var primas = @ViewBag.EpecialidaPrimaPorSuma;
+    var productoAseguradoras = @ViewBag.ProductoAseguradoras;
+    var recargosFinancieros = @ViewBag.RecargosFinancieros;
+    var impuestos = Model.ClienteNavigation.CodigoPostalNavigation.ZonaNavigation.Impuesto;
+    var poliza = Model.Id;
+    var cliente = Model.ClienteNavigation.Id;
+}
+
+<form asp-action="Edit" id="CotizarForm">
+
+        <div class="headerInfo">
+            <div>
+                <text>Especialidades: </text>
+                    <ul id="Especialidades">
+                        @foreach (var esp in ViewBag.Especialidades)
+                        {
+                            <li>@esp.Nombre</li>
+                        }
+                    </ul>
+            </div>
+
+            <div>
+                <text>Cantidad Cuotas:</text>
+                <select id="Cuotas" onchange="updateCuotas()">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6" selected>6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select> 
+            </div>
+
+            <div>
+                <text>Impuestos </text>
+                <text id="ImpuestosText"></text>
+            </div>
         </div>
-    </div>
-</div>
 
+        <div id="mainTable">
+            <div>
+                <text>Recargos Financieros </text>
+                <text id="recargoFinancieroText"></text>
+            </div>
+    
+            <div id="cotizacionTabla"></div>
+        </div>
 
-<div id="example-table"></div>
+        <input type="button" value="Cotizar" onclick="submitCotizar()" class="btn btn-default" />
+</form>
 
-<link href="~/tabulator/dist/css/semantic-ui/tabulator_semantic-ui.min.css" rel="stylesheet">
-<script type="text/javascript" src="~/tabulator/dist/js/tabulator.min.js"></script>
-
-<script>
-    var data1 = {
-		sumaAsegurada : '500000',
-		primaBase: '5000',
-		recargaPrima: '0',
-		comisionPrima: '5000',
-		primaPoliza: '12',
-		comisionPrima: '600',
-		premioTotal: '5950.00',
-		pemioCuota: '991.67',
-		condicion: 'Ninguno',
-	};
-	var data2 = {
-		sumaAsegurada : '1000000',
-		primaBase: '8000',
-		recargaPrima: '5',
-		comisionPrima: '8400',
-		primaPoliza: '16.19',
-		comisionPrima: '1360',
-		premioTotal: '996.00',
-		pemioCuota: '1666.00',
-		condicion: 'Min. Sugerida',
-	}
-
-    var table = new Tabulator("#example-table", {
-    data: [data1, data2],           //load row data from array
-	layout:"fitColumns",      //fit columns to width of table
-	responsiveLayout:"hide",  //hide columns that dont fit on the table
-	tooltips:true,            //show tool tips on cells
-	addRowPos:"top",          //when adding a new row, add it to the top of the table
-	movableColumns:true,      //allow column order to be changed
-	resizableRows:true,       //allow row order to be changed
-	//initialSort:[             //set the initial sort order of the data
-	//	{column:"name", dir:"asc"},
-	//],
-	columns:[                 //define the table columns
-		{formatter:"rowSelection", titleFormatter:"rowSelection", align:"center", headerSort:false, cellClick:function(e, cell){
-	        cell.getRow().toggleSelect();
-	     }},
-		{title:"Suma asegurada", field:"sumaAsegurada", formatter:"money", formatterParams:{ decimal:".", thousand:",", symbol:"$", symbolAfter:"p", precision:false}},
-		{title:"Prima base", field:"primaBase", formatter:"money", formatterParams:{ decimal:".", thousand:",", symbol:"$", symbolAfter:"p", precision:false}},
-
-		{title:"Recarga Prima %", field:"recargaPrima", editor:"input", editor:true, formatter:"money", formatterParams:{ decimal:".", thousand:",", symbol:"%", symbolAfter:"p", precision:false}
-		  
-		},
-
-		{title:"Comision prima", field:"comisionPrima", formatter:"money", formatterParams:{ decimal:".", thousand:",", symbol:"$", symbolAfter:"p", precision:false}},
-		{title:"Prima poliza", field:"primaPoliza"},
-		{title:"Comision prima", field:"comisionPrima"},
-		{title:"Premio total", field:"premioTotal", formatter:"money", formatterParams:{ decimal:".", thousand:",", symbol:"$", symbolAfter:"p", precision:false}},
-		{title:"Premio cuota", field:"pemioCuota", formatter:"money", formatterParams:{ decimal:".", thousand:",", symbol:"$", symbolAfter:"p", precision:false}},
-
-		{title:"Condicion", field:"condicion", width:95, editor:"select", editorParams:{values:["Ninguno", "Min. Sugerida", "Sugerida", "Ideal"]}
-
-		},
-	],
-});
-
-</script>
-
-
-
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-        </form>
-    </div>
-</div>
 
 <div>
-    <a asp-action="Index">Volver a Listado de Polizas a Cotizas</a>
+    <a asp-action="Index">Volver a Listado de Polizas a Cotizar</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+
+<script>
+    function renderTableData(rowToUpdate) {
+        var cuotasSelected = document.getElementById("Cuotas");
+        var cantidadCuotas = cuotasSelected.options[cuotasSelected.selectedIndex].value;
+        var especialidadesPrima = JSON.parse('@Html.Raw(Json.Serialize(primas))');   
+        var recargosFinancieros = JSON.parse('@Html.Raw(Json.Serialize(recargosFinancieros))');
+        var polizaId = JSON.parse('@Html.Raw(Json.Serialize(poliza))');
+        var clienteId =  JSON.parse('@Html.Raw(Json.Serialize(cliente))');
+        var impuestos = JSON.parse('@Html.Raw(Json.Serialize(impuestos))');
+        let recargoFinanciero = recargosFinancieros[cantidadCuotas];
+        document.getElementById("recargoFinancieroText").innerHTML = (Number(recargoFinanciero) * 100).toFixed(0) + '%'; 
+        document.getElementById("ImpuestosText").innerHTML = (Number(impuestos) * 100).toFixed(0) + '%'; 
+
+        var productoAseguradoras = JSON.parse('@Html.Raw(Json.Serialize(productoAseguradoras))');   
+        // TODO More than 1 Aseguradora
+        let comisionPrimaBase = productoAseguradoras[1];
+
+        var tableData = new Array();  
+        for (var i = 0; i < especialidadesPrima.length; i++) {
+            let rowValue = {};
+            // Row to update
+            if (rowToUpdate !== undefined && rowToUpdate.id == i) {
+                rowValue.recargaPrima = rowToUpdate.recargaPrima;
+                rowValue.condicion = rowToUpdate.condicion;
+            }
+            else {
+                if (rowToUpdate == undefined) {
+                    // Default values, first load
+                    rowValue.recargaPrima = '0';
+                    rowValue.condicion = 'Ninguno';
+                }
+                else {
+                    // Skip row update
+                	continue;
+                }
+            }
+            rowValue.id = i;
+            rowValue.sumaAsegurada  = especialidadesPrima[i].sumaAsegurada;
+            rowValue.primaBase = especialidadesPrima[i].primaBase;
+
+		    rowValue.primaPoliza = (rowValue.primaBase + ( rowValue.primaBase * (parseInt(rowValue.recargaPrima, 10) / 100))).toFixed(0);
+		    let recargo = parseInt(rowValue.recargaPrima, 10) / 100 * rowValue.primaBase;
+		    let a = ((comisionPrimaBase / 100 * rowValue.primaBase) + (recargo)) * 100;
+		    let b = (recargo + rowValue.primaBase)
+		    rowValue.comisionPrimaPercent =  (a / b).toFixed(2);
+		    rowValue.comisionPrima = ((rowValue.comisionPrimaPercent / 100) * rowValue.primaPoliza).toFixed(2);
+		    let premio1 = (rowValue.primaPoliza * recargoFinanciero).toFixed(0);
+            let premio2 = (rowValue.primaPoliza * impuestos).toFixed(0);
+            let subtotalPremio = (Number(premio1) + Number(premio2)).toFixed(0);
+            rowValue.premioTotal = Number(rowValue.primaPoliza) + Number(subtotalPremio);
+            rowValue.premioCuota = (Number(rowValue.premioTotal) / Number(cantidadCuotas)).toFixed(0);
+
+            // Hidden fields
+            rowValue.cantidadCuotas = cantidadCuotas;
+            rowValue.impuestos = impuestos;
+            rowValue.polizaId = polizaId;
+            rowValue.clienteId = clienteId;
+            rowValue.recargoFinanciero = recargoFinanciero;
+
+		    tableData.push(rowValue);
+        }
+        return tableData;
+    }
+
+     function recargaPrimaEditor(cell, onRendered, success, cancel) {
+        var cellValue = cell.getValue();
+        input = document.createElement("input");
+        input.setAttribute("type", "number");
+
+        input.value = cellValue;
+        onRendered(function(){
+            input.focus();
+            input.style.height = "100%";
+        });
+
+        function onChange() {
+            var rowToUpdate = cell.getRow()._row.data;
+            rowToUpdate.recargaPrima = input.value;
+            console.log(rowToUpdate);
+            if (input.value != cellValue && (input.value <= 50 && input.value >= 0)) {
+                var updatedTable = (renderTableData(rowToUpdate));
+                table.updateOrAddData(updatedTable);
+                success(input.value);
+            }
+            else {
+                cancel();
+            }
+        }
+
+        input.addEventListener("keydown", function (e) {
+            if (e.keyCode == 13) onChange();
+            if (e.keyCode == 27) cancel();
+        });
+
+        input.addEventListener("blur", onChange);
+        return input;
+    }
+
+    function updateCuotas() {
+        table.updateOrAddData(renderTableData());
+    }
+
+    function submitCotizar() {
+        var selectedData = JSON.stringify(table.getSelectedData());
+
+         $.ajax({
+                url: '/Polizas/saveCotizaciones',
+                type: 'GET',
+                cache: false,
+                //contentType: "application/json; charset=utf-8",
+                dataType: 'text',
+                data: { 'cotizaciones': selectedData } ,
+                success: function (responseValue) {
+                 confirm(responseValue);
+                },
+                error: function () {
+                    alert('Error occured');
+                }
+            });
+    }
+
+    var tableData = renderTableData();
+    var table = new Tabulator("#cotizacionTabla", {
+        data: tableData,           //load row data from array
+	    layout:"fitData",      //fit columns to width of table
+	    responsiveLayout:"collapse",  //hide columns that dont fit on the table
+	    tooltips:true,            //show tool tips on cells
+	    addRowPos:"top",          //when adding a new row, add it to the top of the table
+	    movableColumns:true,      //allow column order to be changed
+	    resizableRows:true,       //allow row order to be changed
+	    columns:[
+		    {formatter:"rowSelection", titleFormatter:"rowSelection", align:"center", headerSort:false, cellClick:function(e, cell){
+	            cell.getRow().toggleSelect();
+	         }},
+		    {title:"Suma asegurada",width:150, widthShrink:1, field:"sumaAsegurada", formatter:"money", formatterParams:{ decimal:".", thousand:",", symbol:"$", symbolAfter:"p", precision:false}},
+		    {title:"Prima base", field:"primaBase", formatter:"money", formatterParams:{ decimal:".", thousand:",", symbol:"$", symbolAfter:"p", precision:false}},
+
+            {
+                title: "Recarga Prima %", width:120, widthShrink:3, field: "recargaPrima", editor: "input", editor: true, formatter: "money", formatterParams: { decimal: ".", thousand: ",", symbol: "%", symbolAfter: "p", precision: false },
+                    validator: ["min:0", "max:50", "numeric"],
+                        editor: recargaPrimaEditor,
+		    },
+
+		    {title:"Comision prima", field:"comisionPrima", formatter:"money", formatterParams:{ decimal:".", thousand:",", symbol:"$", symbolAfter:"p", precision:false}},
+		    {title:"Prima poliza", field:"primaPoliza"},
+		    {title:"Comision prima %", width:100, widthShrink:3, field:"comisionPrimaPercent", formatter:"money", formatterParams:{ decimal:".", thousand:",", symbol:"%", symbolAfter:"p", precision:false}},
+            {title:"Premio total", field:"premioTotal", formatter:"money", formatterParams:{ decimal:".", thousand:",", symbol:"$", symbolAfter:"p", precision:false}},
+		    {title:"Premio cuota", field:"premioCuota", formatter:"money", formatterParams:{ decimal:".", thousand:",", symbol:"$", symbolAfter:"p", precision:false}},
+		    {title:"Condicion", field:"condicion", width:100, widthShrink:3, editor:"select", editorParams:{values:["Ninguno", "Min. Sugerida", "Sugerida", "Ideal"]}
+
+		    },
+	    ],
+    });
+
+</script>

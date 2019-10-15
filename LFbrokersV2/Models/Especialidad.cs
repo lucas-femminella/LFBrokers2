@@ -16,6 +16,7 @@ namespace LFbrokersV2.Models
         public string Nombre { get; set; }
         public string Observaciones { get; set; }
         public int Producto { get; set; }
+        public int Riesgo { get; set; }
 
         public ICollection<EspecialidadCliente> EspecialidadCliente { get; set; }
         public ICollection<EspecialidadPrimaPorSuma> EspecialidadPrimaPorSuma { get; set; }

@@ -102,7 +102,7 @@ INSERT INTO [dbo].[Producto]
            ,[Ramo])
      VALUES
            (1
-           ,'Producto 1'
+           ,'Praxis Medica Individual'
            ,'Descripcion 1'
            ,1)
 GO
@@ -115,7 +115,7 @@ INSERT INTO [dbo].[Producto]
            ,[Ramo])
      VALUES
            (2
-           ,'Producto 2'
+           ,'Praxis Medica Individual'
            ,'Descripcion 2'
            ,2)
 GO
@@ -178,3 +178,161 @@ GO
 
 
 
+
+INSERT INTO [dbo].[ProductoAseguradora]
+           ([ID]
+           ,[Producto]
+           ,[Aseguradora]
+           ,[Activo]
+           ,[ComisionPrimaBase])
+     VALUES
+           (1
+           ,1
+           ,1
+           ,1
+           ,15)
+GO
+
+
+INSERT INTO [dbo].[ProductoAseguradora]
+           ([ID]
+           ,[Producto]
+           ,[Aseguradora]
+           ,[Activo]
+           ,[ComisionPrimaBase])
+     VALUES
+           (2
+           ,2
+           ,2
+           ,2
+           ,20)
+GO
+
+
+INSERT INTO [dbo].[RecargoCuotas] ([ID] ,[Aseguradora] ,[CantidadCuotas] ,[RecargoFinanciero])
+VALUES(1 ,1 ,1 ,0.05)
+GO
+INSERT INTO [dbo].[RecargoCuotas] ([ID] ,[Aseguradora] ,[CantidadCuotas] ,[RecargoFinanciero])
+VALUES(2 ,1 ,2 ,0.06)
+GO
+INSERT INTO [dbo].[RecargoCuotas] ([ID] ,[Aseguradora] ,[CantidadCuotas] ,[RecargoFinanciero])
+VALUES(3 ,1 ,3 ,0.07)
+GO
+INSERT INTO [dbo].[RecargoCuotas] ([ID] ,[Aseguradora] ,[CantidadCuotas] ,[RecargoFinanciero])
+VALUES(4 ,1 ,4 ,0.08)
+GO
+INSERT INTO [dbo].[RecargoCuotas] ([ID] ,[Aseguradora] ,[CantidadCuotas] ,[RecargoFinanciero])
+VALUES(5 ,1 ,5 ,0.09)
+GO
+INSERT INTO [dbo].[RecargoCuotas] ([ID] ,[Aseguradora] ,[CantidadCuotas] ,[RecargoFinanciero])
+VALUES(6 ,1 ,6 ,0.10)
+GO
+INSERT INTO [dbo].[RecargoCuotas] ([ID] ,[Aseguradora] ,[CantidadCuotas] ,[RecargoFinanciero])
+VALUES(7 ,1 ,7 ,0.11)
+GO
+INSERT INTO [dbo].[RecargoCuotas] ([ID] ,[Aseguradora] ,[CantidadCuotas] ,[RecargoFinanciero])
+VALUES(8 ,1 ,8 ,0.12)
+GO
+INSERT INTO [dbo].[RecargoCuotas] ([ID] ,[Aseguradora] ,[CantidadCuotas] ,[RecargoFinanciero])
+VALUES(9 ,1 ,9 ,0.13)
+GO
+INSERT INTO [dbo].[RecargoCuotas] ([ID] ,[Aseguradora] ,[CantidadCuotas] ,[RecargoFinanciero])
+VALUES(10 ,1 ,10 ,0.14)
+GO
+INSERT INTO [dbo].[RecargoCuotas] ([ID] ,[Aseguradora] ,[CantidadCuotas] ,[RecargoFinanciero])
+VALUES(11 ,1 ,11 ,0.15)
+GO
+INSERT INTO [dbo].[RecargoCuotas] ([ID] ,[Aseguradora] ,[CantidadCuotas] ,[RecargoFinanciero])
+VALUES(12 ,1 ,12 ,0.16)
+GO
+
+INSERT INTO [dbo].[RecargoCuotas] ([ID] ,[Aseguradora] ,[CantidadCuotas] ,[RecargoFinanciero])
+VALUES(13 ,2 ,1 ,0.05)
+GO
+INSERT INTO [dbo].[RecargoCuotas] ([ID] ,[Aseguradora] ,[CantidadCuotas] ,[RecargoFinanciero])
+VALUES(14 ,2 ,2 ,0.06)
+GO
+INSERT INTO [dbo].[RecargoCuotas] ([ID] ,[Aseguradora] ,[CantidadCuotas] ,[RecargoFinanciero])
+VALUES(15 ,2 ,3 ,0.07)
+GO
+INSERT INTO [dbo].[RecargoCuotas] ([ID] ,[Aseguradora] ,[CantidadCuotas] ,[RecargoFinanciero])
+VALUES(16 ,2 ,4 ,0.08)
+GO
+INSERT INTO [dbo].[RecargoCuotas] ([ID] ,[Aseguradora] ,[CantidadCuotas] ,[RecargoFinanciero])
+VALUES(17 ,2 ,5 ,0.09)
+GO
+INSERT INTO [dbo].[RecargoCuotas] ([ID] ,[Aseguradora] ,[CantidadCuotas] ,[RecargoFinanciero])
+VALUES(18 ,2 ,6 ,0.10)
+GO
+INSERT INTO [dbo].[RecargoCuotas] ([ID] ,[Aseguradora] ,[CantidadCuotas] ,[RecargoFinanciero])
+VALUES(19 ,2 ,7 ,0.11)
+GO
+INSERT INTO [dbo].[RecargoCuotas] ([ID] ,[Aseguradora] ,[CantidadCuotas] ,[RecargoFinanciero])
+VALUES(20 ,2 ,8 ,0.12)
+GO
+INSERT INTO [dbo].[RecargoCuotas] ([ID] ,[Aseguradora] ,[CantidadCuotas] ,[RecargoFinanciero])
+VALUES(21 ,2 ,9 ,0.13)
+GO
+INSERT INTO [dbo].[RecargoCuotas] ([ID] ,[Aseguradora] ,[CantidadCuotas] ,[RecargoFinanciero])
+VALUES(22 ,2 ,10 ,0.14)
+GO
+INSERT INTO [dbo].[RecargoCuotas] ([ID] ,[Aseguradora] ,[CantidadCuotas] ,[RecargoFinanciero])
+VALUES(23 ,2 ,11 ,0.15)
+GO
+INSERT INTO [dbo].[RecargoCuotas] ([ID] ,[Aseguradora] ,[CantidadCuotas] ,[RecargoFinanciero])
+VALUES(24 ,2 ,12 ,0.16)
+GO
+
+INSERT INTO [dbo].[EspecialidadPrimaPorSuma]
+           ([ID]
+           ,[Especialidad]
+           ,[PrimaBase]
+           ,[SumaAsegurada]
+           ,[ProductoAseguradora]
+           ,[EspecialidadCodigoExterno]
+           ,[PrimaVigenteDesde])
+     VALUES
+           (1
+           ,1
+           ,2500
+           ,500000
+           ,1
+           ,1
+           , DATEADD(year, 1, GETDATE()))
+GO
+
+INSERT INTO [dbo].[EspecialidadPrimaPorSuma]
+           ([ID]
+           ,[Especialidad]
+           ,[PrimaBase]
+           ,[SumaAsegurada]
+           ,[ProductoAseguradora]
+           ,[EspecialidadCodigoExterno]
+           ,[PrimaVigenteDesde])
+     VALUES
+           (2
+           ,2
+           ,5500
+           ,1000000
+           ,1
+           ,2
+           , DATEADD(year, 1, GETDATE()))
+GO
+
+INSERT INTO [dbo].[EspecialidadPrimaPorSuma]
+           ([ID]
+           ,[Especialidad]
+           ,[PrimaBase]
+           ,[SumaAsegurada]
+           ,[ProductoAseguradora]
+           ,[EspecialidadCodigoExterno]
+           ,[PrimaVigenteDesde])
+     VALUES
+           (3
+           ,3
+           ,14000
+           ,1500000
+           ,1
+           ,2
+           , DATEADD(year, 1, GETDATE()))
+GO
